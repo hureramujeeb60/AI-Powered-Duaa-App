@@ -1,8 +1,11 @@
 from langchain_together import ChatTogether
 import asyncio
+from dotenv import load_dotenv
 import os
 
-chat = ChatTogether(model="meta-llama/Llama-3-70b-chat-hf", api_key='618a451120015d5fe1895f2a0c8178cfb44cbfdfbafa3a0562df2487f34f1016')
+load_dotenv()
+
+chat = ChatTogether(model="meta-llama/Llama-3-70b-chat-hf", api_key='TOGETHER_API_KEY')
 
 SYSTEM_PROMPT = """
 You are an Islamic scholar providing Duas based on the user's query. 
