@@ -1,8 +1,6 @@
-# app/utils/notifications.py
-
 import firebase_admin
 from firebase_admin import messaging
-from app.utils.db import get_all_fcm_tokens  # A function to get all FCM tokens from DB
+from app.utils.query import get_all_fcm_tokens  # A function to get all FCM tokens from DB
 
 firebase_admin.initialize_app()
 

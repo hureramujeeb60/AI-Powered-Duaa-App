@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import insert, update
 from app.db import get_db
-from app.models import tokens  # Assuming tokens is your tokens model
+from app.models import token  # Assuming tokens is your tokens model
 
 router = APIRouter()
 
@@ -18,7 +18,7 @@ async def subscribe_to_notifications(request: Request, db: AsyncSession = Depend
 
     try:
         # Insert the FCM token if it doesn't exist, or update if it already exists
-        stmt = insert(tokens).values(fcm_token=fcm_token).on_conflict_do_nothing()
+        stmt = insert(token).values(fcm_token=fcm_token).on_conflict_do_nothing()
         await db.execute(stmt)
         await db.commit()
     except Exception as e:
@@ -38,7 +38,7 @@ async def unsubscribe_from_notifications(request: Request, db: AsyncSession = De
 
     try:
         # Remove the token from the database
-        stmt = tokens.delete().where(tokens.c.fcm_token == fcm_token)
+        stmt = token.delete().where(token.c.fcm_token == fcm_token)
         await db.execute(stmt)
         await db.commit()
     except Exception as e:

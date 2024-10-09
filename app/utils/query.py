@@ -1,4 +1,4 @@
-from db import AsyncSessionLocal
+from app.utils.query import AsyncSessionLocal
 
 async def get_all_fcm_tokens():
     async with AsyncSessionLocal() as session:
