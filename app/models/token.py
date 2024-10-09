@@ -16,15 +16,15 @@ users = Table(
     "users",
     metadata,
     Column("id", Integer, primary_key=True, index=True),
-    Column("user_id", Integer, nullable=False),
-    UniqueConstraint("user_id", name="uq_user_id"),  # Optional if needed
+    Column("fingerprint", String, nullable=False),
+    UniqueConstraint("fingerprint", name="uq_fingerprint"),  # Optional if needed
 )
 
 session = Table(
     "session",
     metadata,
     Column("id", Integer, primary_key=True, index=True),
-    Column("usr_id", Integer, ForeignKey("user.user_id", ondelete="CASCADE"), nullable=False),
+    Column("fingerprint_id", String, ForeignKey("users.fingerprint", ondelete="CASCADE"), nullable=False),
     Column("created_at", DateTime(timezone=True), server_default=func.now())
 )
 
@@ -32,7 +32,7 @@ chat_history = Table(
     "chat_history",
     metadata,
     Column("id", Integer, primary_key=True, index=True),
-    Column("history_user_id", Integer, ForeignKey("user.id"), nullable=False),
+    Column("fingerprint_id", String, ForeignKey("users.fingerprint"), nullable=False),
     Column("key", Enum("User", "Ai", name="key_enum"), nullable=False),
     Column("message", Text, nullable=False),
     Column("session_id", Integer, ForeignKey("session.id", ondelete="CASCADE"), nullable=False),

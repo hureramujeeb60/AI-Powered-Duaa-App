@@ -20,10 +20,10 @@ class ChatHistoryCreate(BaseModel):
 
 router = APIRouter()
 
-@router.post("/api/chat_history/")
+@router.post("/chat_history/")
 async def create_chat_history(data: dict, db: AsyncSession = Depends(get_db)):
     query = chat_history.insert().values(
-        history_user_id=data['user_id'],
+        fingerprint_id=data['fingerprint_id'],
         key=data['key'],  # This should pass the string, not the Enum class
         message=data['message'],
         session_id=data['session_id']
