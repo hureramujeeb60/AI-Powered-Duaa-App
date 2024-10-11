@@ -13,8 +13,7 @@ class KeyEnum(PyEnum):
 
 # Pydantic model for chat history data
 class ChatHistoryCreate(BaseModel):
-    user_id: int
-    key: KeyEnum
+    fingerprint_id: int
     message: str
     session_id: int
 
