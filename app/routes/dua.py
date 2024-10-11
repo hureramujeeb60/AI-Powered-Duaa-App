@@ -45,6 +45,7 @@ async def dua_endpoint(query: str, fingerprint_id: str, session_id: int, db: Asy
             # Print the complete accumulated content after streaming
             print("Complete Response:")
             print(accumulated_content)
+            await insert_chat_history(fingerprint_id, KeyEnum.User, query, session_id, db)
             await insert_chat_history(fingerprint_id, KeyEnum.Ai, accumulated_content, session_id, db)
         except Exception as e:
             yield f"data: 'An error occurred: {str(e)}'\n\n"
