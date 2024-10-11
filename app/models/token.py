@@ -36,4 +36,6 @@ chat_history = Table(
     Column("key", Enum("User", "Ai", name="key_enum"), nullable=False),
     Column("message", Text, nullable=False),
     Column("session_id", Integer, ForeignKey("session.id", ondelete="CASCADE"), nullable=False),
+    Column("session_name", String, nullable=True),
+
 )
